@@ -27,24 +27,21 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 find_package(QT NAMES Qt6 Qt5 COMPONENTS Widgets REQUIRED)
 find_package(Qt${QT_VERSION_MAJOR} COMPONENTS Widgets REQUIRED)
 
-if(ANDROID)
-  add_library(booklib SHARED
+add_executable(booklib
     main.cpp
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
-    controllers/mainwindowcontroller.cpp
-    controllers/mainwindowcontroller.h
-  )
-else()
-  add_executable(booklib
-    main.cpp
-    mainwindow.cpp
-    mainwindow.h
-    mainwindow.ui
-    controllers/mainwindowcontroller.cpp
-    controllers/mainwindowcontroller.h
-  )
-endif()
+    repository.h
+    book.cpp
+    book.h
+    reader.cpp
+    reader.h
+    memoryrepository.cpp
+    memoryrepository.h
+    addbookdialog.cpp
+    addbookdialog.h
+    addbookdialog.ui
+)
 
 target_link_libraries(booklib PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

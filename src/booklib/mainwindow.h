@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "repository.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -10,10 +11,15 @@ QT_END_NAMESPACE
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    IRepository* _repository;
 
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
+    void UpdateBooksList();
+
+private slots:
+    void on_addBookButton_clicked();
 
 private:
     Ui::MainWindow *ui;
