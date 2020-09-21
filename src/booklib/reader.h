@@ -12,9 +12,11 @@ class Reader
     QString _name;
     std::list<Book *> *_books;
 public:
-    Reader(QString name);
+    Reader(int id, QString name);
     ~Reader();
     int getId();
+    QString getName();
+    QString toString();
     void addBook(Book *);
     void removeBook(Book *);
 };

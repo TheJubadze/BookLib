@@ -17,10 +17,16 @@ public:
     void setName(QString);
     void setAuthor(QString);
     void setReader(Reader *);
+    void removeReader();
 
     int getId();
     QString getName();
     QString getAuthor();
+    Reader *getReader();
+
+    bool isAvailable();
+
+    QString toString();
 };
 
 #endif // BOOK_H

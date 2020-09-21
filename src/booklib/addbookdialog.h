@@ -1,7 +1,6 @@
 #ifndef ADDBOOKDIALOG_H
 #define ADDBOOKDIALOG_H
 
-#include "repository.h"
 #include "unitofwork.h"
 
 #include <QDialog>
