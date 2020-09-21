@@ -16,6 +16,11 @@ Reader::~Reader()
     delete _books;
 }
 
+int Reader::getId()
+{
+    return _id;
+}
+
 void Reader::addBook(Book *b)
 {
     _books->push_back(b);

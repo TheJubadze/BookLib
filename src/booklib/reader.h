@@ -5,15 +5,18 @@
 #include <list>
 #include "book.h"
 
+class Book;
 class Reader
 {
+    int _id;
     QString _name;
-    std::list<Book*>* _books;
+    std::list<Book *> *_books;
 public:
     Reader(QString name);
     ~Reader();
-    void addBook(Book*);
-    void removeBook(Book*);
+    int getId();
+    void addBook(Book *);
+    void removeBook(Book *);
 };
 
 #endif // READER_H

@@ -2,6 +2,7 @@
 #define ADDBOOKDIALOG_H
 
 #include "repository.h"
+#include "unitofwork.h"
 
 #include <QDialog>
 
@@ -12,10 +13,10 @@ class AddBookDialog;
 class AddBookDialog : public QDialog
 {
     Q_OBJECT
-    IRepository* _repository;
+    UnitOfWork *_unitOfWork;
 
 public:
-    explicit AddBookDialog(QWidget *parent = nullptr, IRepository* repository = nullptr);
+    explicit AddBookDialog(QWidget *parent = nullptr, UnitOfWork *unitOfWork = nullptr);
     ~AddBookDialog();
 
 private slots:

@@ -1,14 +1,14 @@
 #include "addbookdialog.h"
 #include "book.h"
-#include "repository.h"
 #include "ui_addbookdialog.h"
+#include "unitofwork.h"
 
-AddBookDialog::AddBookDialog(QWidget *parent, IRepository* repository) :
+AddBookDialog::AddBookDialog(QWidget *parent, UnitOfWork *unitOfWork) :
     QDialog(parent),
     ui(new Ui::AddBookDialog)
 {
     ui->setupUi(this);
-    _repository = repository;
+    _unitOfWork = unitOfWork;
 }
 
 AddBookDialog::~AddBookDialog()
@@ -18,6 +18,9 @@ AddBookDialog::~AddBookDialog()
 
 void AddBookDialog::on_buttonBox_accepted()
 {
-    auto book = new Book(ui->bookName->text(), ui->bookAuthor->text());
-    _repository->addBook(book);
+    auto repository = _unitOfWork->getBookRepository();
+    auto id = repository->getNextId();
+    auto bookName = ui->bookName->text();
+    auto bookAuthor = ui->bookAuthor->text();
+    repository->add(new Book(id, bookName, bookAuthor));
 }

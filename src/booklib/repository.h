@@ -4,13 +4,18 @@
 #include <book.h>
 #include <list>
 
-class IRepository
+template <class T>
+class Repository
 {
+    std::list<T*>* _items;
+    int _nextIndex;
 public:
-    virtual ~IRepository(){};
-    virtual Book* getBookById(int id) = 0;
-    virtual std::list<Book*>* getBooks() = 0;
-    virtual void addBook(Book*) = 0;
+    Repository();
+    virtual ~Repository();
+    virtual int getNextId();
+    virtual T* getById(int id);
+    virtual std::list<T*>* getAll();
+    virtual void add(T*);
 };
 
 #endif // REPOSITORY_H

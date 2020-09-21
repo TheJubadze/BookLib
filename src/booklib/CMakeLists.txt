@@ -32,13 +32,14 @@ add_executable(booklib
     mainwindow.cpp
     mainwindow.h
     mainwindow.ui
+    repository.cpp
     repository.h
+    unitofwork.cpp
+    unitofwork.h
     book.cpp
     book.h
     reader.cpp
     reader.h
-    memoryrepository.cpp
-    memoryrepository.h
     addbookdialog.cpp
     addbookdialog.h
     addbookdialog.ui

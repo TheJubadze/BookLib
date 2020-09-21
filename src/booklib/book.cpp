@@ -1,16 +1,8 @@
 #include "book.h"
 
-Book::Book()
+Book::Book(int id, QString name, QString author)
 {
-}
-
-Book::Book(QString name)
-{
-    _name = name;
-}
-
-Book::Book(QString name, QString author)
-{
+    _id = id;
     _name = name;
     _author = author;
 }
@@ -23,6 +15,11 @@ void Book::setName(QString name)
 void Book::setAuthor(QString author)
 {
     _author = author;
+}
+
+void Book::setReader(Reader *reader)
+{
+    _reader = reader;
 }
 
 int Book::getId()
