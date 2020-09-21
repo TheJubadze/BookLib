@@ -49,8 +49,7 @@ void MainWindow::UpdateYieldButton()
     auto rRow = ui->readersList->currentIndex().row();
     if(bRow > -1 && rRow > -1){
         auto book = (*_booksMap)[ui->booksList->currentItem()->text()];
-        auto reader = (*_readersMap)[ui->readersList->currentItem()->text()];
-        if(book->getReader() != reader){
+        if(book->isAvailable()){
             ui->yieldBookButton->setEnabled(true);
         }
         else{

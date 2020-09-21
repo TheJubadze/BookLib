@@ -7,6 +7,7 @@ Book::Book(int id, QString name, QString author)
     _id = id;
     _name = name;
     _author = author;
+    _reader = nullptr;
 }
 
 void Book::setName(QString name)
