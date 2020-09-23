@@ -9,10 +9,6 @@ Reader::Reader(int id, QString name)
 
 Reader::~Reader()
 {
-    for(auto const b : *_books)
-    {
-        delete b;
-    }
     _books->clear();
     delete _books;
 }

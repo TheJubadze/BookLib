@@ -19,20 +19,24 @@ class MainWindow : public QMainWindow
     std::map<QString, Book *> *_booksMap;
     std::map<QString, Reader *> *_readersMap;
 
+    Book *GetSelectedBook();
+    Reader *GetSelectedReader();
+    void UpdateButtons();
+
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
     void UpdateBooksList();
     void UpdateReadersList();
-    void UpdateYieldButton();
+    void UpdateForm();
 
 private slots:
     void on_addBookButton_clicked();
     void on_addReaderButton_clicked();
     void on_booksList_itemSelectionChanged();
     void on_readersList_itemSelectionChanged();
-
     void on_yieldBookButton_clicked();
+    void on_returnBookButton_clicked();
 
 private:
     Ui::MainWindow *ui;

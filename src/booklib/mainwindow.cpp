@@ -13,6 +13,9 @@ MainWindow::MainWindow(QWidget *parent)
     _unitOfWork = new UnitOfWork();
     _booksMap = new std::map<QString, Book *>();
     _readersMap = new std::map<QString, Reader *>();
+
+    ui->yieldBookButton->setEnabled(false);
+    ui->returnBookButton->setEnabled(false);
 }
 
 MainWindow::~MainWindow()
@@ -43,25 +46,12 @@ void MainWindow::UpdateReadersList()
     };
 }
 
-void MainWindow::UpdateYieldButton()
+void MainWindow::UpdateForm()
 {
-    auto bRow = ui->booksList->currentIndex().row();
-    auto rRow = ui->readersList->currentIndex().row();
-    if(bRow > -1 && rRow > -1){
-        auto book = (*_booksMap)[ui->booksList->currentItem()->text()];
-        if(book->isAvailable()){
-            ui->yieldBookButton->setEnabled(true);
-        }
-        else{
-            ui->yieldBookButton->setEnabled(false);
-        }
-    }
-    else
-    {
-        ui->yieldBookButton->setEnabled(false);
-    }
+    UpdateButtons();
 }
 
+//-------------------Slots-------------------
 void MainWindow::on_addBookButton_clicked()
 {
     AddBookDialog dialog(this, _unitOfWork);
@@ -78,19 +68,61 @@ void MainWindow::on_addReaderButton_clicked()
 
 void MainWindow::on_booksList_itemSelectionChanged()
 {
-    UpdateYieldButton();
+    UpdateForm();
 }
 
 void MainWindow::on_readersList_itemSelectionChanged()
 {
-    UpdateYieldButton();
+    UpdateForm();
 }
 
 void MainWindow::on_yieldBookButton_clicked()
 {
-    auto book = (*_booksMap)[ui->booksList->currentItem()->text()];
-    auto reader = (*_readersMap)[ui->readersList->currentItem()->text()];
+    auto book = GetSelectedBook();
+    auto reader = GetSelectedReader();
     book->setReader(reader);
     reader->addBook(book);
-    UpdateYieldButton();
+    UpdateForm();
+}
+
+void MainWindow::on_returnBookButton_clicked()
+{
+    auto book = GetSelectedBook();
+    auto reader = GetSelectedReader();
+    book->removeReader();
+    reader->removeBook(book);
+    UpdateForm();
+}
+
+//-------------------Private members-------------------
+void MainWindow::UpdateButtons()
+{
+    auto bRow = ui->booksList->currentIndex().row();
+    auto rRow = ui->readersList->currentIndex().row();
+    if(bRow > -1 && rRow > -1){
+        auto book = (*_booksMap)[ui->booksList->currentItem()->text()];
+        if(book->isAvailable()){
+            ui->yieldBookButton->setEnabled(true);
+            ui->returnBookButton->setEnabled(false);
+        }
+        else{
+            ui->yieldBookButton->setEnabled(false);
+            ui->returnBookButton->setEnabled(true);
+        }
+    }
+    else
+    {
+        ui->yieldBookButton->setEnabled(false);
+        ui->returnBookButton->setEnabled(false);
+    }
+}
+
+Book *MainWindow::GetSelectedBook()
+{
+    return (*_booksMap)[ui->booksList->currentItem()->text()];
+}
+
+Reader *MainWindow::GetSelectedReader()
+{
+    return (*_readersMap)[ui->readersList->currentItem()->text()];
 }
