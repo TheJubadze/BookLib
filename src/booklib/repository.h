@@ -18,7 +18,7 @@ public:
     virtual T *getById(int id);
     virtual std::list<T *> *getAll();
     virtual void add(T *);
-    virtual void clear();
+    virtual void remove(T *);
 
     template <typename _Predicate>
     std::list<T *> *filter(_Predicate p);

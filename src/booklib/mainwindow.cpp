@@ -2,8 +2,10 @@
 #include "./ui_mainwindow.h"
 #include "addbookdialog.h"
 #include "addreaderdialog.h"
+#include "removebookconfirmationdialog.h"
 
 #include <QString>
+#include <QtCore>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -14,14 +16,12 @@ MainWindow::MainWindow(QWidget *parent)
     _booksMap = new std::map<QString, Book *>();
     _readersMap = new std::map<QString, Reader *>();
 
-    ui->yieldBookButton->setEnabled(false);
-    ui->returnBookButton->setEnabled(false);
-
     _unitOfWork->load();
 
-    UpdateBooksList();
-    UpdateReadersList();
-    UpdateButtons();
+    updateBooksList();
+    updateReadersList();
+    updateButtons();
+    ui->booksList->setCurrentRow(0);
 }
 
 MainWindow::~MainWindow()
@@ -38,7 +38,7 @@ void MainWindow::on_addBookButton_clicked()
     AddBookDialog dialog(this, _unitOfWork);
     dialog.exec();
     _unitOfWork->save();
-    UpdateBooksList();
+    updateBooksList();
 }
 
 void MainWindow::on_addReaderButton_clicked()
@@ -46,61 +46,67 @@ void MainWindow::on_addReaderButton_clicked()
     AddReaderDialog dialog(this, _unitOfWork);
     dialog.exec();
     _unitOfWork->save();
-    UpdateReadersList();
+    updateReadersList();
 }
 
 void MainWindow::on_booksList_itemSelectionChanged()
 {
-    UpdateButtons();
+    updateButtons();
 }
 
 void MainWindow::on_readersList_itemSelectionChanged()
 {
-    UpdateButtons();
+    updateButtons();
 }
 
 void MainWindow::on_yieldBookButton_clicked()
 {
-    auto book = GetSelectedBook();
-    auto reader = GetSelectedReader();
+    auto book = getSelectedBook();
+    auto reader = getSelectedReader();
     reader->addBook(book);
     _unitOfWork->save();
-    UpdateButtons();
+    updateButtons();
 }
 
 void MainWindow::on_returnBookButton_clicked()
 {
-    auto book = GetSelectedBook();
-    auto reader = GetSelectedReader();
+    auto book = getSelectedBook();
+    auto reader = getSelectedReader();
     reader->removeBook(book);
     _unitOfWork->save();
-    UpdateButtons();
+    updateButtons();
+}
+
+void MainWindow::on_removeBookButton_clicked()
+{
+    RemoveBookConfirmationDialog dialog(_unitOfWork, getSelectedBook(), this);
+    if(dialog.exec())
+    {
+        _unitOfWork->save();
+        updateBooksList();
+        updateButtons();
+    }
+}
+
+void MainWindow::on_showReaderButton_clicked()
+{
+    auto readerItems = ui->readersList->findItems(getSelectedBook()->getReader()->toString(), Qt::MatchExactly);
+    if(!readerItems.isEmpty()){
+        ui->readersList->setCurrentItem(readerItems[0]);
+    }
 }
 
 //-------------------Private members-------------------
-void MainWindow::UpdateButtons()
+void MainWindow::updateButtons()
 {
-    auto bRow = ui->booksList->currentIndex().row();
-    auto rRow = ui->readersList->currentIndex().row();
-    if(bRow > -1 && rRow > -1){
-        auto book = (*_booksMap)[ui->booksList->currentItem()->text()];
-        if(book->isAvailable()){
-            ui->yieldBookButton->setEnabled(true);
-            ui->returnBookButton->setEnabled(false);
-        }
-        else{
-            ui->yieldBookButton->setEnabled(false);
-            ui->returnBookButton->setEnabled(true);
-        }
-    }
-    else
-    {
-        ui->yieldBookButton->setEnabled(false);
-        ui->returnBookButton->setEnabled(false);
-    }
+    auto book = getSelectedBook();
+    ui->removeBookButton->setEnabled(isBookSelected());
+    ui->yieldBookButton->setEnabled(isBookSelected() && book->isAvailable() && isReaderSelected());
+    ui->returnBookButton->setEnabled(isBookSelected() && !book->isAvailable());
+    ui->showReaderButton->setEnabled(ui->returnBookButton->isEnabled());
 }
 
-void MainWindow::UpdateBooksList()
+void MainWindow::updateBooksList()
 {
     ui->booksList->clear();
     for(auto b : *_unitOfWork->getBookRepository()->getAll()) {
@@ -110,7 +116,7 @@ void MainWindow::UpdateBooksList()
     };
 }
 
-void MainWindow::UpdateReadersList()
+void MainWindow::updateReadersList()
 {
     ui->readersList->clear();
     for(auto r : *_unitOfWork->getReaderRepository()->getAll()) {
@@ -120,12 +126,25 @@ void MainWindow::UpdateReadersList()
     };
 }
 
-Book *MainWindow::GetSelectedBook()
+Book *MainWindow::getSelectedBook()
 {
-    return (*_booksMap)[ui->booksList->currentItem()->text()];
+    return isBookSelected()
+        ? (*_booksMap)[ui->booksList->currentItem()->text()]
+        : nullptr;
 }
 
-Reader *MainWindow::GetSelectedReader()
+Reader *MainWindow::getSelectedReader()
 {
     return (*_readersMap)[ui->readersList->currentItem()->text()];
 }
+
+bool MainWindow::isBookSelected()
+{
+    return ui->booksList->currentIndex().row() > -1;
+}
+
+bool MainWindow::isReaderSelected()
+{
+    return ui->readersList->currentIndex().row() > -1;
+}
+

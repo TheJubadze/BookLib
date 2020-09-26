@@ -28,6 +28,7 @@ public:
     Reader *getReader();
     bool isAvailable();
     QString toString();
+    void clear();
 
     virtual void read(const QJsonObject &) override;
     virtual void write(QJsonObject &) const override;

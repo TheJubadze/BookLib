@@ -24,6 +24,7 @@ public:
     QString toString();
     void addBook(Book *);
     void removeBook(Book *);
+    void clear();
     void setBooks(std::list<Book *> *);
 
     virtual void read(const QJsonObject &) override;

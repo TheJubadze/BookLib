@@ -6,26 +6,44 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>622</width>
-    <height>507</height>
+    <width>939</width>
+    <height>515</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <layout class="QHBoxLayout" name="horizontalLayout">
+   <layout class="QHBoxLayout" name="horizontalLayout_3">
     <item>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
        <widget class="QListWidget" name="booksList"/>
       </item>
       <item>
-       <widget class="QPushButton" name="addBookButton">
-        <property name="text">
-         <string>Add book</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <widget class="QPushButton" name="addBookButton">
+          <property name="text">
+           <string>Add book</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="removeBookButton">
+          <property name="text">
+           <string>Remove book</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="showReaderButton">
+          <property name="text">
+           <string>Show reader</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -56,11 +74,29 @@
        <widget class="QListWidget" name="readersList"/>
       </item>
       <item>
-       <widget class="QPushButton" name="addReaderButton">
-        <property name="text">
-         <string>Add reader</string>
-        </property>
-       </widget>
+       <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <item>
+         <widget class="QPushButton" name="addReaderButton">
+          <property name="text">
+           <string>Add reader</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="removeReaderButton">
+          <property name="text">
+           <string>Remove reader</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="showBooksButton">
+          <property name="text">
+           <string>Show books</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -71,7 +107,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>622</width>
+     <width>939</width>
      <height>24</height>
     </rect>
    </property>

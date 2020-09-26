@@ -49,15 +49,18 @@ std::list<T *> *Repository<T>::filter(_Predicate p)
 }
 
 template <class T>
-void Repository<T>::add(T *b)
+void Repository<T>::add(T *item)
 {
-    _items->push_back(b);
+    _items->push_back(item);
+    _nextIndex = _nextIndex > item->getId() ? _nextIndex : item->getId() + 1;
 }
 
-template <class T>
-void Repository<T>::clear()
+template<class T>
+void Repository<T>::remove(T *item)
 {
-    _items->clear();
+    _items->remove(item);
+    item->clear();
+    delete item;
 }
 
 template class Repository<Book>;

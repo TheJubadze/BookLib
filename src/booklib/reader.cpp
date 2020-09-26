@@ -45,6 +45,12 @@ void Reader::removeBook(Book *b)
     b->removeReader();
 }
 
+void Reader::clear()
+{
+    for(auto b : *_books)
+        removeBook(b);
+}
+
 void Reader::setBooks(std::list<Book *> *books)
 {
     for(auto b : *books)

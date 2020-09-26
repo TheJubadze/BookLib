@@ -24,12 +24,15 @@ public:
     ~MainWindow();
 
 private:
-    Book *GetSelectedBook();
-    Reader *GetSelectedReader();
+    Book *getSelectedBook();
+    Reader *getSelectedReader();
     
-    void UpdateButtons();
-    void UpdateBooksList();
-    void UpdateReadersList();
+    bool isBookSelected();
+    bool isReaderSelected();
+
+    void updateButtons();
+    void updateBooksList();
+    void updateReadersList();
 
 private slots:
     void on_addBookButton_clicked();
@@ -38,6 +41,10 @@ private slots:
     void on_readersList_itemSelectionChanged();
     void on_yieldBookButton_clicked();
     void on_returnBookButton_clicked();
+
+    void on_removeBookButton_clicked();
+
+    void on_showReaderButton_clicked();
 
 private:
     Ui::MainWindow *ui;

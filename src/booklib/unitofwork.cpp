@@ -85,7 +85,6 @@ void UnitOfWork::read(const QJsonObject &json, Repository<T> *repository)
     if (json.contains(name) && json[name].isArray())
     {
         QJsonArray itemArray = json[name].toArray();
-        repository->clear();
         for (int i = 0; i < itemArray.size(); ++i)
         {
             QJsonObject itemObject = itemArray[i].toObject();
