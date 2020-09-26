@@ -7,15 +7,18 @@
 template <class T>
 class Repository
 {
-    std::list<T*>* _items;
+    std::string _id;
+    std::list<T *> *_items;
     int _nextIndex;
 public:
-    Repository();
+    Repository(std::string);
     virtual ~Repository();
+    std::string getId() { return _id; };
     virtual int getNextId();
-    virtual T* getById(int id);
-    virtual std::list<T*>* getAll();
-    virtual void add(T*);
+    virtual T *getById(int id);
+    virtual std::list<T *> *getAll();
+    virtual void add(T *);
+    virtual void clear();
 };
 
 #endif // REPOSITORY_H

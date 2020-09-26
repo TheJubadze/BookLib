@@ -1,13 +1,17 @@
 #include "book.h"
-
 #include <QString>
+#include <QJsonObject>
 
-Book::Book(int id, QString name, QString author)
+Book::Book()
+{
+    _reader = nullptr;
+}
+
+Book::Book(int id, QString name, QString author) : Book()
 {
     _id = id;
     _name = name;
     _author = author;
-    _reader = nullptr;
 }
 
 void Book::setName(QString name)
@@ -58,5 +62,24 @@ bool Book::isAvailable()
 QString Book::toString()
 {
     return QString("%1 %2: %3")
-            .arg(QString::number(getId()), getAuthor(), getName());
+        .arg(QString::number(getId()), getAuthor(), getName());
+}
+
+void Book::read(const QJsonObject &json)
+{
+    if (json.contains("id") && json["id"].isDouble())
+        _id = json["id"].toInt();
+
+    if (json.contains("name") && json["name"].isString())
+        _name = json["name"].toString();
+
+    if (json.contains("author") && json["author"].isString())
+        _author = json["author"].toString();
+}
+
+void Book::write(QJsonObject &json) const
+{
+    json["id"] = _id;
+    json["name"] = _name;
+    json["author"] = _author;
 }

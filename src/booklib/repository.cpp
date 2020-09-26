@@ -1,8 +1,9 @@
 #include "repository.h"
 
 template <class T>
-Repository<T>::Repository()
+Repository<T>::Repository(std::string id)
 {
+    _id = id;
     _items = new std::list<T*>();
     _nextIndex = 0;
 }
@@ -42,6 +43,12 @@ template <class T>
 void Repository<T>::add(T *b)
 {
     _items->push_back(b);
+}
+
+template <class T>
+void Repository<T>::clear()
+{
+    _items->clear();
 }
 
 template class Repository<Book>;

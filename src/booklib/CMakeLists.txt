@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.5)
 project(booklib LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
+set(CMAKE_PREFIX_PATH "~/Qt/5.15.1/gcc_64/")
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -36,6 +37,7 @@ add_executable(booklib
     repository.h
     unitofwork.cpp
     unitofwork.h
+    contentitem.h
     book.cpp
     book.h
     reader.cpp
