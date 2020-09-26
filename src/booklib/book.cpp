@@ -34,7 +34,7 @@ void Book::removeReader()
     _reader = nullptr;
 }
 
-int Book::getId()
+int Book::getId() const
 {
     return _id;
 }

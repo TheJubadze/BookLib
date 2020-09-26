@@ -40,6 +40,15 @@ std::list<T *> *Repository<T>::getAll()
 }
 
 template <class T>
+template <typename _Predicate>
+std::list<T *> *Repository<T>::filter(_Predicate p)
+{
+    std::list<T*> result = new std::list<T*>();
+    std::copy_if (_items->begin(), _items->end(), std::back_inserter(result), p);
+    return result;
+}
+
+template <class T>
 void Repository<T>::add(T *b)
 {
     _items->push_back(b);

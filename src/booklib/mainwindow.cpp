@@ -63,7 +63,6 @@ void MainWindow::on_yieldBookButton_clicked()
 {
     auto book = GetSelectedBook();
     auto reader = GetSelectedReader();
-    book->setReader(reader);
     reader->addBook(book);
     _unitOfWork->save();
     UpdateButtons();
@@ -73,7 +72,6 @@ void MainWindow::on_returnBookButton_clicked()
 {
     auto book = GetSelectedBook();
     auto reader = GetSelectedReader();
-    book->removeReader();
     reader->removeBook(book);
     _unitOfWork->save();
     UpdateButtons();

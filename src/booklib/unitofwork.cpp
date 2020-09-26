@@ -7,8 +7,8 @@
 
 UnitOfWork::UnitOfWork()
 {
-    _bookRepository = new Repository<Book>("booksRepository");
-    _readerRepository = new Repository<Reader>("readersRepository");
+    _bookRepository = new Repository<Book>("bookRepository");
+    _readerRepository = new Repository<Reader>("readerRepository");
 }
 
 UnitOfWork::~UnitOfWork()
@@ -37,6 +37,8 @@ void UnitOfWork::read(const QJsonObject &json)
 {
     read(json, _bookRepository);
     read(json, _readerRepository);
+    for(auto reader : *_readerRepository->getAll())
+        reader->setBooks(_bookRepository->getAll());
 }
 
 bool UnitOfWork::save() const

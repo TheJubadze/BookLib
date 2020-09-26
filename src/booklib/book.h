@@ -17,7 +17,7 @@ class Book final : public ContentItem
 public:
     Book();
     Book(int, QString, QString);
-    virtual int getId() override;
+    virtual int getId() const override;
     void setName(QString);
     void setAuthor(QString);
     void setReader(Reader *);

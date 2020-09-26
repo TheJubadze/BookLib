@@ -19,6 +19,9 @@ public:
     virtual std::list<T *> *getAll();
     virtual void add(T *);
     virtual void clear();
+
+    template <typename _Predicate>
+    std::list<T *> *filter(_Predicate p);
 };
 
 #endif // REPOSITORY_H

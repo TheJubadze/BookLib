@@ -3,6 +3,7 @@
 
 Reader::Reader()
 {
+    _bookIds = new std::list<int>();
     _books = new std::list<Book *>();
 }
 
@@ -17,7 +18,7 @@ Reader::~Reader()
     delete _books;
 }
 
-int Reader::getId()
+int Reader::getId() const
 {
     return _id;
 }
@@ -35,11 +36,20 @@ QString Reader::toString()
 void Reader::addBook(Book *b)
 {
     _books->push_back(b);
+    b->setReader(this);
 }
 
 void Reader::removeBook(Book *b)
 {
     _books->remove(b);
+    b->removeReader();
+}
+
+void Reader::setBooks(std::list<Book *> *books)
+{
+    for(auto b : *books)
+        if(std::find(_bookIds->begin(), _bookIds->end(), b->getId()) != _bookIds->end())
+            addBook(b);
 }
 
 void Reader::read(const QJsonObject &json)
@@ -53,14 +63,13 @@ void Reader::read(const QJsonObject &json)
     if (json.contains("books") && json["books"].isArray())
     {
         QJsonArray booksArray = json["books"].toArray();
-        _books->clear();
         for (int i = 0; i < booksArray.size(); ++i)
         {
             QJsonObject bookObject = booksArray[i].toObject();
-            Book *book = new Book();
-            book->read(bookObject);
-            book->setReader(this);
-            _books->push_back(book);
+            int bookId;
+            if (json.contains("id") && json["id"].isDouble())
+                bookId = json["id"].toInt();
+            _bookIds->push_back(bookId);
         }
     }
 }
@@ -74,7 +83,7 @@ void Reader::write(QJsonObject &json) const
     for (const Book *b : *_books)
     {
         QJsonObject bookObject;
-        b->write(bookObject);
+        bookObject["id"] = b->getId();
         booksArray.append(bookObject);
     }
 

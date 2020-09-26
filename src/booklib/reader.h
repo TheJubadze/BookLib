@@ -12,17 +12,19 @@ class Reader final : public ContentItem
 {
     int _id;
     QString _name;
+    std::list<int> *_bookIds;
     std::list<Book *> *_books;
 
 public:
     Reader();
     Reader(int id, QString name);
     ~Reader();
-    virtual int getId() override;
+    virtual int getId() const override;
     QString getName();
     QString toString();
     void addBook(Book *);
     void removeBook(Book *);
+    void setBooks(std::list<Book *> *);
 
     virtual void read(const QJsonObject &) override;
     virtual void write(QJsonObject &) const override;
