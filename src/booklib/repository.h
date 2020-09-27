@@ -1,7 +1,7 @@
 #ifndef REPOSITORY_H
 #define REPOSITORY_H
 
-#include <book.h>
+#include <entities/book.h>
 #include <list>
 
 template <class T>

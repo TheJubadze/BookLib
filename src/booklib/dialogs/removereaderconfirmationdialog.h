@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include "unitofwork.h"
-#include "reader.h"
+#include "entities/reader.h"
 
 namespace Ui {
 class RemoveReaderConfirmationDialog;

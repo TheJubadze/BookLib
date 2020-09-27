@@ -66,7 +66,7 @@ void MainWindow::on_returnBookButton_clicked()
 {
     auto book = getSelectedBook();
     auto reader = getSelectedReader();
-    reader->removeBook(book);
+    reader->returnBook(book);
     _unitOfWork->save();
     updateButtons();
 }

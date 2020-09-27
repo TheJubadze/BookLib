@@ -24,7 +24,7 @@ public:
     QString getName();
     QString toString();
     void addBook(Book *);
-    void removeBook(Book *);
+    void returnBook(Book *);
     void clear();
     void setBooks(std::list<Book *> *);
     std::list<Book *> *getBooks();

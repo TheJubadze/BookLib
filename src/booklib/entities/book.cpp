@@ -14,7 +14,8 @@ Book::Book(int id, QString name, QString author) : Book()
 
 Book::~Book()
 {
-    removeReader();
+    if(_reader != nullptr)
+        _reader->returnBook(this);
 }
 
 void Book::setName(QString name)
@@ -32,7 +33,7 @@ void Book::setReader(Reader *reader)
     _reader = reader;
 }
 
-void Book::removeReader()
+void Book::unsetReader()
 {
     _reader = nullptr;
 }

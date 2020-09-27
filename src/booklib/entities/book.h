@@ -25,7 +25,7 @@ public:
     void setName(QString);
     void setAuthor(QString);
     void setReader(Reader *);
-    void removeReader();
+    void unsetReader();
 
     QString getName();
     QString getAuthor();

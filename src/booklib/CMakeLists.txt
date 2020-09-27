@@ -24,26 +24,26 @@ add_executable(booklib
     repository.h
     unitofwork.cpp
     unitofwork.h
-    contentitem.h
-    book.cpp
-    book.h
-    reader.cpp
-    reader.h
-    addbookdialog.cpp
-    addbookdialog.h
-    addbookdialog.ui
-    addreaderdialog.cpp
-    addreaderdialog.h
-    addreaderdialog.ui
-    removebookconfirmationdialog.cpp
-    removebookconfirmationdialog.h
-    removebookconfirmationdialog.ui
-    removereaderconfirmationdialog.cpp
-    removereaderconfirmationdialog.h
-    removereaderconfirmationdialog.ui
-    showbooksdialog.cpp
-    showbooksdialog.h
-    showbooksdialog.ui
+    entities/contentitem.h
+    entities/book.cpp
+    entities/book.h
+    entities/reader.cpp
+    entities/reader.h
+    dialogs/addbookdialog.cpp
+    dialogs/addbookdialog.h
+    dialogs/addbookdialog.ui
+    dialogs/addreaderdialog.cpp
+    dialogs/addreaderdialog.h
+    dialogs/addreaderdialog.ui
+    dialogs/removebookconfirmationdialog.cpp
+    dialogs/removebookconfirmationdialog.h
+    dialogs/removebookconfirmationdialog.ui
+    dialogs/removereaderconfirmationdialog.cpp
+    dialogs/removereaderconfirmationdialog.h
+    dialogs/removereaderconfirmationdialog.ui
+    dialogs/showbooksdialog.cpp
+    dialogs/showbooksdialog.h
+    dialogs/showbooksdialog.ui
 )
 
 target_link_libraries(booklib PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

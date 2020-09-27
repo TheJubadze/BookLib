@@ -3,7 +3,7 @@
 
 #include <QDialog>
 #include <list>
-#include "book.h"
+#include "entities/book.h"
 
 namespace Ui {
 class ShowBooksDialog;

@@ -15,7 +15,7 @@ Reader::Reader(int id, QString name) : Reader()
 Reader::~Reader()
 {
     for(auto b : *_books)
-        b->removeReader();
+        b->unsetReader();
 
     delete _books;
     delete _bookIds;
@@ -42,10 +42,10 @@ void Reader::addBook(Book *b)
     b->setReader(this);
 }
 
-void Reader::removeBook(Book *b)
+void Reader::returnBook(Book *b)
 {
     _books->remove(b);
-    b->removeReader();
+    b->unsetReader();
 }
 
 void Reader::setBooks(std::list<Book *> *books)

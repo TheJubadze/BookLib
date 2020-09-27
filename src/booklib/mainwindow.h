@@ -2,11 +2,11 @@
 #define MAINWINDOW_H
 
 #include "unitofwork.h"
-#include "addbookdialog.h"
-#include "addreaderdialog.h"
-#include "removebookconfirmationdialog.h"
-#include "removereaderconfirmationdialog.h"
-#include "showbooksdialog.h"
+#include "dialogs/addbookdialog.h"
+#include "dialogs/addreaderdialog.h"
+#include "dialogs/removebookconfirmationdialog.h"
+#include "dialogs/removereaderconfirmationdialog.h"
+#include "dialogs/showbooksdialog.h"
 
 #include <QListWidget>
 #include <QMainWindow>

@@ -1,7 +1,7 @@
 #ifndef UNITOFWORK_H
 #define UNITOFWORK_H
 
-#include "reader.h"
+#include "entities/reader.h"
 #include "repository.h"
 #include <QFile>
 #include <QString>
