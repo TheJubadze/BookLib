@@ -5,7 +5,7 @@ Repository<T>::Repository(std::string id)
 {
     _id = id;
     _items = new std::list<T*>();
-    _nextIndex = 0;
+    _nextIndex = 1;
 }
 
 template <class T>
@@ -59,7 +59,6 @@ template<class T>
 void Repository<T>::remove(T *item)
 {
     _items->remove(item);
-    item->clear();
     delete item;
 }
 

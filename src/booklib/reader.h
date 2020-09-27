@@ -26,6 +26,9 @@ public:
     void removeBook(Book *);
     void clear();
     void setBooks(std::list<Book *> *);
+    std::list<Book *> *getBooks();
+    bool hasBooks();
+
 
     virtual void read(const QJsonObject &) override;
     virtual void write(QJsonObject &) const override;

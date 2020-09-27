@@ -54,3 +54,5 @@ compile_commands.json
 src/booklib/.vscode/
 
 src/booklib/build/
+
+db.json

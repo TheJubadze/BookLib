@@ -14,6 +14,11 @@ Book::Book(int id, QString name, QString author) : Book()
     _author = author;
 }
 
+Book::~Book()
+{
+    removeReader();
+}
+
 void Book::setName(QString name)
 {
     _name = name;
@@ -63,11 +68,6 @@ QString Book::toString()
 {
     return QString("%1 %2: %3")
             .arg(QString::number(getId()), getAuthor(), getName());
-}
-
-void Book::clear()
-{
-    removeReader();
 }
 
 void Book::read(const QJsonObject &json)

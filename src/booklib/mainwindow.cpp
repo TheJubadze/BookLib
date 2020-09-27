@@ -1,8 +1,9 @@
-#include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include "mainwindow.h"
 #include "addbookdialog.h"
 #include "addreaderdialog.h"
 #include "removebookconfirmationdialog.h"
+#include "removereaderconfirmationdialog.h"
 
 #include <QString>
 #include <QtCore>
@@ -96,6 +97,17 @@ void MainWindow::on_showReaderButton_clicked()
     }
 }
 
+void MainWindow::on_removeReaderButton_clicked()
+{
+    RemoveReaderConfirmationDialog dialog(_unitOfWork, getSelectedReader(), this);
+    if(dialog.exec())
+    {
+        _unitOfWork->save();
+        updateReadersList();
+        updateButtons();
+    }
+}
+
 //-------------------Private members-------------------
 void MainWindow::updateButtons()
 {
@@ -104,10 +116,15 @@ void MainWindow::updateButtons()
     ui->yieldBookButton->setEnabled(isBookSelected() && book->isAvailable() && isReaderSelected());
     ui->returnBookButton->setEnabled(isBookSelected() && !book->isAvailable());
     ui->showReaderButton->setEnabled(ui->returnBookButton->isEnabled());
+
+    auto reader = getSelectedReader();
+    ui->removeReaderButton->setEnabled(isReaderSelected());
+    ui->showBooksButton->setEnabled(isReaderSelected() && reader->hasBooks());
 }
 
 void MainWindow::updateBooksList()
 {
+    ui->booksList->setCurrentRow(-1);
     ui->booksList->clear();
     for(auto b : *_unitOfWork->getBookRepository()->getAll()) {
         auto s = b->toString();
@@ -118,6 +135,7 @@ void MainWindow::updateBooksList()
 
 void MainWindow::updateReadersList()
 {
+    ui->readersList->setCurrentRow(-1);
     ui->readersList->clear();
     for(auto r : *_unitOfWork->getReaderRepository()->getAll()) {
         auto s = r->toString();
@@ -135,7 +153,9 @@ Book *MainWindow::getSelectedBook()
 
 Reader *MainWindow::getSelectedReader()
 {
-    return (*_readersMap)[ui->readersList->currentItem()->text()];
+    return isReaderSelected()
+        ? (*_readersMap)[ui->readersList->currentItem()->text()]
+        : nullptr;
 }
 
 bool MainWindow::isBookSelected()

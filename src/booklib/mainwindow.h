@@ -41,10 +41,9 @@ private slots:
     void on_readersList_itemSelectionChanged();
     void on_yieldBookButton_clicked();
     void on_returnBookButton_clicked();
-
     void on_removeBookButton_clicked();
-
     void on_showReaderButton_clicked();
+    void on_removeReaderButton_clicked();
 
 private:
     Ui::MainWindow *ui;

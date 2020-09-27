@@ -15,7 +15,11 @@ Reader::Reader(int id, QString name) : Reader()
 
 Reader::~Reader()
 {
+    for(auto b : *_books)
+        b->removeReader();
+
     delete _books;
+    delete _bookIds;
 }
 
 int Reader::getId() const
@@ -45,17 +49,21 @@ void Reader::removeBook(Book *b)
     b->removeReader();
 }
 
-void Reader::clear()
-{
-    for(auto b : *_books)
-        removeBook(b);
-}
-
 void Reader::setBooks(std::list<Book *> *books)
 {
     for(auto b : *books)
         if(std::find(_bookIds->begin(), _bookIds->end(), b->getId()) != _bookIds->end())
             addBook(b);
+}
+
+std::list<Book *> *Reader::getBooks()
+{
+    return _books;
+}
+
+bool Reader::hasBooks()
+{
+    return !_books->empty();
 }
 
 void Reader::read(const QJsonObject &json)
@@ -72,10 +80,8 @@ void Reader::read(const QJsonObject &json)
         for (int i = 0; i < booksArray.size(); ++i)
         {
             QJsonObject bookObject = booksArray[i].toObject();
-            int bookId;
-            if (json.contains("id") && json["id"].isDouble())
-                bookId = json["id"].toInt();
-            _bookIds->push_back(bookId);
+            if (bookObject.contains("id") && bookObject["id"].isDouble())
+                _bookIds->push_back(bookObject["id"].toInt());
         }
     }
 }
