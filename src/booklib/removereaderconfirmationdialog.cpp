@@ -1,6 +1,5 @@
 #include "removereaderconfirmationdialog.h"
 #include "ui_removereaderconfirmationdialog.h"
-#include "reader.h"
 
 RemoveReaderConfirmationDialog::RemoveReaderConfirmationDialog(
         UnitOfWork *unitOfWork,

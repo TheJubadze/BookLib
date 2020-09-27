@@ -4,6 +4,9 @@
 #include "reader.h"
 #include "contentitem.h"
 #include <QString>
+#pragma once
+#include <QJsonObject>
+#include <QString>
 #include <QJsonObject>
 
 class Reader;

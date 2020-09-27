@@ -2,7 +2,6 @@
 #define ADDREADERDIALOG_H
 
 #include "unitofwork.h"
-
 #include <QDialog>
 
 namespace Ui {

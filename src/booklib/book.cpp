@@ -1,6 +1,4 @@
 #include "book.h"
-#include <QString>
-#include <QJsonObject>
 
 Book::Book()
 {

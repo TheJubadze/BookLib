@@ -2,7 +2,8 @@
 #define ADDBOOKDIALOG_H
 
 #include "unitofwork.h"
-
+#include "book.h"
+#include "unitofwork.h"
 #include <QDialog>
 
 namespace Ui {

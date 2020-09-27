@@ -1,6 +1,5 @@
 #include "removebookconfirmationdialog.h"
 #include "ui_removebookconfirmationdialog.h"
-#include "book.h"
 
 RemoveBookConfirmationDialog::RemoveBookConfirmationDialog(
         UnitOfWork *unitOfWork,

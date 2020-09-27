@@ -1,7 +1,5 @@
 #include "addbookdialog.h"
-#include "book.h"
 #include "ui_addbookdialog.h"
-#include "unitofwork.h"
 
 AddBookDialog::AddBookDialog(QWidget *parent, UnitOfWork *unitOfWork) :
     QDialog(parent),

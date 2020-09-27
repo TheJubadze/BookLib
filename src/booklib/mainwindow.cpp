@@ -1,12 +1,5 @@
 #include "./ui_mainwindow.h"
 #include "mainwindow.h"
-#include "addbookdialog.h"
-#include "addreaderdialog.h"
-#include "removebookconfirmationdialog.h"
-#include "removereaderconfirmationdialog.h"
-
-#include <QString>
-#include <QtCore>
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -106,6 +99,12 @@ void MainWindow::on_removeReaderButton_clicked()
         updateReadersList();
         updateButtons();
     }
+}
+
+void MainWindow::on_showBooksButton_clicked()
+{
+    ShowBooksDialog dialog(getSelectedReader()->getBooks(), this);
+    dialog.exec();
 }
 
 //-------------------Private members-------------------

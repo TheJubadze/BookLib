@@ -41,6 +41,9 @@ add_executable(booklib
     removereaderconfirmationdialog.cpp
     removereaderconfirmationdialog.h
     removereaderconfirmationdialog.ui
+    showbooksdialog.cpp
+    showbooksdialog.h
+    showbooksdialog.ui
 )
 
 target_link_libraries(booklib PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)

@@ -1,4 +1,3 @@
-#include <QJsonArray>
 #include "reader.h"
 
 Reader::Reader()

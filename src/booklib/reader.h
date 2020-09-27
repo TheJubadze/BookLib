@@ -3,6 +3,7 @@
 
 #include <QString>
 #include <QJsonObject>
+#include <QJsonArray>
 #include <list>
 #include "book.h"
 #include "contentitem.h"

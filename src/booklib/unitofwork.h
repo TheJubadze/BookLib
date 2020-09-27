@@ -5,6 +5,10 @@
 #include "repository.h"
 #include <QFile>
 #include <QString>
+#include <QDataStream>
+#include <QJsonArray>
+#include <QJsonObject>
+#include <QJsonDocument>
 
 class UnitOfWork
 {

@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include "unitofwork.h"
+#include "addbookdialog.h"
+#include "addreaderdialog.h"
+#include "removebookconfirmationdialog.h"
+#include "removereaderconfirmationdialog.h"
+#include "showbooksdialog.h"
 
 #include <QListWidget>
 #include <QMainWindow>
@@ -44,6 +49,8 @@ private slots:
     void on_removeBookButton_clicked();
     void on_showReaderButton_clicked();
     void on_removeReaderButton_clicked();
+
+    void on_showBooksButton_clicked();
 
 private:
     Ui::MainWindow *ui;
